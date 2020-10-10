@@ -21,7 +21,6 @@ $update = json_decode(file_get_contents('php://input'));
 if (isset($update->message)){
     $message = $update->message;
     $chat_id = $message->chat->id;
-    $text = $message->text;
     $message_id = $message->message_id;
     $textmessage = $message->text;
     $lang = $message->from->language_code;
