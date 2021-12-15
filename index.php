@@ -21,11 +21,16 @@ $update = json_decode(file_get_contents('php://input'));
 if (isset($update->message)){
     $message = $update->message;
     $chat_id = $message->chat->id;
-    $message_id = $message->message_id;
     $textmessage = $message->text;
     $lang = $message->from->language_code;
 }
-$data = $update->callback_query->data;
+if(isset($update->callback_query)){
+    $data = $update->callback_query->data;
+    $chatid = $update->callback_query->message->chat->id;
+    $fromid = $update->callback_query->from->id;
+    $messageid = $update->callback_query->inline_message_id;
+    $lang = $update->callback_query->from->language_code;
+}
 if ($textmessage == '/start'){
     if ($lang == "fa"){
         $txt = "🌹به ربات جیرجیرک خوش اومدی، با من میتونی متن های خود تخریبی بسازی!\nکافیه یه متن رو برام بفرستی که برات رمزنگاریش کنم، بعدش میتونی از طریق من به اشتراک بزاریش طوری که فقط یکبار بشه خوندش اونم بصورتی که کپی نشه";
